@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& T) {
+        int n=T.size();
+        stack<int> stack;
+        for(int i=0;i<n;++i){
+            if(stack.empty()||T[stack.top()]>=T[i]){
+                stack.push(i);
+            }
+            else{
+                T[stack.top()]=i-stack.top();
+                i--;
+                stack.pop();
+            }
+        }
+        while(!stack.empty()){
+            T[stack.top()]=0;
+            stack.pop();
+        }
+        return T;
+    }
+};
+
+
+Runtime: 196 ms, faster than 54.53% of C++ online submissions for Daily Temperatures.
+Memory Usage: 16.1 MB, less than 68.00% of C++ online submissions for Daily Temperatures.
